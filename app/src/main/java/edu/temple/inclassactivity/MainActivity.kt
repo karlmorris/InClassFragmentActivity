@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity() {
         typedArray.recycle()
 
         // Attach an instance of ImageDisplayFragment using factory method
-
+        val fragment = ImageDisplayFragment.newInstance(imageArray)
+        val fragmentT = supportFragmentManager.beginTransaction()
+        fragmentT.add(R.id.fragmentContainerView, fragment)
+        fragmentT.commit()
     }
 }
