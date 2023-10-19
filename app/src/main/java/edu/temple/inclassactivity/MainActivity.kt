@@ -15,5 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         // Attach an instance of ImageDisplayFragment using factory method
 
+
+
     }
 }
