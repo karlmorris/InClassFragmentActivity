@@ -4,11 +4,13 @@
 
 package edu.temple.inclassactivity
 
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.TypedArrayUtils
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -40,11 +42,18 @@ class ImageDisplayFragment : Fragment() {
         // The recycler view is the root element of the Fragment's layout
         // as such the view argument passed to onViewCreated() is the RecyclerView
         with (view as RecyclerView) {
-            adapter = CustomRecyclerAdapter(images)
+
+            if(::images.isInitialized) {
+                adapter = CustomRecyclerAdapter(images)
+            }
+
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
-
+    fun setImage (temp : IntArray) {
+        images = temp
+        (view as RecyclerView).adapter = CustomRecyclerAdapter(images)
+    }
     companion object {
         fun newInstance(images: IntArray) =
             ImageDisplayFragment().apply {
