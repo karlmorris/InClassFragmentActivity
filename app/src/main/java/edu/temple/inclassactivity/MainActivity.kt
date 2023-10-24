@@ -18,6 +18,5 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .add(R.id.fragmentContainerView, fragment1)
             .commit()
-
     }
 }
