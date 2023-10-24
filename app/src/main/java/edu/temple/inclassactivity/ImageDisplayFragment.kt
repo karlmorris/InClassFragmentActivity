@@ -16,6 +16,8 @@ const val IMAGES_KEY = "imageList"
 
 class ImageDisplayFragment : Fragment() {
 
+    lateinit var someVar : Array<Int>
+
     private lateinit var images: IntArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +42,17 @@ class ImageDisplayFragment : Fragment() {
         // The recycler view is the root element of the Fragment's layout
         // as such the view argument passed to onViewCreated() is the RecyclerView
         with (view as RecyclerView) {
-            adapter = CustomRecyclerAdapter(images)
+            if (::someVar.isInitialized) adapter = CustomRecyclerAdapter(images)
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
+    }
+
+    fun setImages(newImages : IntArray) {
+        images = newImages
+
+        val adapter = CustomRecyclerAdapter(newImages)
+
+        (view as RecyclerView).adapter = adapter
     }
 
     companion object {
