@@ -2,11 +2,25 @@ package edu.temple.inclassactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.ViewModelProvider as ViewModelProvider
+import androidx.lifecycle.ViewModelProvider as ViewModelProvider1
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var someVar : Array<Int>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        //if(::someVar.isInitialized)
+
+
+        //val mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
 
         // Fetch images into IntArray called imageArray
         val typedArray = resources.obtainTypedArray(R.array.image_ids)
@@ -14,11 +28,34 @@ class MainActivity : AppCompatActivity() {
         typedArray.recycle()
 
         // Attach an instance of ImageDisplayFragment using factory method
-        val fragment = ImageDisplayFragment.newInstance(imageArray)
+        //val fragment = ImageDisplayFragment.newInstance(imageArray)
+//
 
-        supportFragmentManager.beginTransaction().add(R.id.fragmentContainerView, fragment).commit()
+        if (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) !is ImageDisplayFragment) {
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragmentContainerView, ImageDisplayFragment())
+                .addToBackStack(null)
+                .setReorderingAllowed(true)
+                .commit()
+        }
+
+
+
+
 
 
 
     }
+
+    fun imageSelected(itemId : Int){
+        Toast.makeText(this,"You selected $itemId", Toast.LENGTH_SHORT).show()
+    }
+
+//    fun setImages(_images : IntArray){
+//        images = _images
+//
+//        (view as RecyclerView).adapter = CustomRecyclerAdapter(images)
+//    }
+
 }
