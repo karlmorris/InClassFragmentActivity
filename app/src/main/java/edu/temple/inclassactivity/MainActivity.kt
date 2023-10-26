@@ -2,14 +2,14 @@ package edu.temple.inclassactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
 
         // Fetch images into IntArray called imageArray
@@ -17,12 +17,19 @@ class MainActivity : AppCompatActivity() {
         val imageArray = IntArray(typedArray.length()) {typedArray.getResourceId(it, 0)}
         typedArray.recycle()
 
-        // Attach an instance of ImageDisplayFragment using factory method
-        val imageDisplayFragment = ImageDisplayFragment.newInstance(imageArray)
+        findViewById<Button>(R.id.button).setOnClickListener {
+            (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as ImageDisplayFragment).setImages(
+                imageArray)
+        }
 
-        supportFragmentManager.beginTransaction()
+
+        // Attach an instance of ImageDisplayFragment using factory method
+        //val imageDisplayFragment = ImageDisplayFragment.newInstance(imageArray)
+
+        /*supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainerView, imageDisplayFragment)
             .commit()
+         */
 
     }
 }
