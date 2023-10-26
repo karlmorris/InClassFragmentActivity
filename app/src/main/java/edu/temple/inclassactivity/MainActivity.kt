@@ -2,6 +2,8 @@ package edu.temple.inclassactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.ViewModelProvider as ViewModelProvider
@@ -27,18 +29,29 @@ class MainActivity : AppCompatActivity() {
         val imageArray = IntArray(typedArray.length()) {typedArray.getResourceId(it, 0)}
         typedArray.recycle()
 
+        val myButton = findViewById<Button>(R.id.button)
+
+//        (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as ImageDisplayFragment).setImages(imageArray)
+
+        myButton.setOnClickListener{
+            (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as ImageDisplayFragment).setImages(imageArray)
+        }
+
+
+
+
         // Attach an instance of ImageDisplayFragment using factory method
         //val fragment = ImageDisplayFragment.newInstance(imageArray)
 //
 
-        if (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) !is ImageDisplayFragment) {
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragmentContainerView, ImageDisplayFragment())
-                .addToBackStack(null)
-                .setReorderingAllowed(true)
-                .commit()
-        }
+//        if (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) !is ImageDisplayFragment) {
+//            supportFragmentManager
+//                .beginTransaction()
+//                .add(R.id.fragmentContainerView, ImageDisplayFragment())
+//                .addToBackStack(null)
+//                .setReorderingAllowed(true)
+//                .commit()
+//        }
 
 
 

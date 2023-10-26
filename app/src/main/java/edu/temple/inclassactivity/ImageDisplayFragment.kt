@@ -19,13 +19,9 @@ class ImageDisplayFragment : Fragment() {
     private lateinit var images: IntArray
 
 
-
-
-
-
-
-
-
+    fun setImages(_images : IntArray){
+        images = _images
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
